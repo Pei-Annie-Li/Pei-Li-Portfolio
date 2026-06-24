@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pei Li — Softgoods Manufacturing Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --page:    #F7F7F5;
+      --white:   #FFFFFF;
+      --ink:     #111111;
+      --mid:     #8A8A8A;
+      --rule:    #DEDEDD;
+      --accent:  #0052CC;
+      --tag-bg:  #EFF3FF;
+    }
+
+    html { font-size: 16px; }
+    body {
+      background: var(--page);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ──────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--page);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+    }
+
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .logo em { font-style: italic; color: var(--accent); }
+
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    nav a:hover { color: var(--ink); }
+    nav a.active-nav { color: var(--ink); }
+    nav a.cta {
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 6px 16px;
+      border-radius: 2px;
+    }
+    nav a.cta:hover { background: var(--accent); color: #fff; }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      padding: 72px 48px 48px;
+      max-width: 680px;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: italic; }
+    .hero p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--mid);
+      max-width: 520px;
+    }
+
+    /* ── FILTER BAR ──────────────────────────────────── */
+    .filters {
+      display: flex;
+      gap: 8px;
+      padding: 0 48px 36px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      background: transparent;
+      color: var(--mid);
+      padding: 6px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--ink);
+      color: var(--ink);
+      background: var(--white);
+    }
+    .filter-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--tag-bg);
+    }
+
+    /* ── GRID ────────────────────────────────────────── */
+    .grid-wrap { padding: 0 40px 80px; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .product-card {
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 1 / 1.05;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* image area */
+    .card-img {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: var(--white);
+      overflow: hidden;
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .product-card:hover .card-img img { transform: scale(1.04); }
+
+    /* placeholder shapes for products without images */
+    .card-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rule);
+      font-size: 3rem;
+      user-select: none;
+    }
+
+    /* meta strip at bottom */
+    .card-meta {
+      padding: 16px 20px 18px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .card-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+    .card-year {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* spec overlay on hover */
+    .spec-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--white);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 1px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+    .product-card:hover .spec-tag {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── STATS ROW ───────────────────────────────────── */
+    .stats-row {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      margin: 0 48px 72px;
+    }
+    .stat {
+      flex: 1;
+      padding: 32px 24px;
+      border-right: 1px solid var(--rule);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 2.6rem;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-num span { font-size: 1.4rem; color: var(--accent); }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--mid);
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ── MODAL ───────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white);
+      max-width: 720px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--mid);
+      line-height: 1;
+      z-index: 10;
+    }
+    .modal-img {
+      width: 100%;
+      height: 300px;
+      background: var(--page);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 32px;
+    }
+    .modal-body { padding: 32px; }
+    .modal-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .modal-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .modal-desc {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: #444;
+      margin-bottom: 24px;
+    }
+    .modal-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-bottom: 24px;
+    }
+    .modal-spec {
+      background: var(--white);
+      padding: 14px 16px;
+    }
+    .modal-spec-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 4px;
+    }
+    .modal-spec-val {
+      font-size: 0.82rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+    .modal-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .modal-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      padding: 4px 10px;
+      color: var(--mid);
+      border-radius: 1px;
+    }
+
+    /* ── PAGE SECTIONS ───────────────────────────────── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ── ABOUT ───────────────────────────────────────── */
+    .about-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 48px 100px;
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .about-wrap h2, .patents-wrap h2, .contact-wrap h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.2;
+      margin-bottom: 32px;
+      color: var(--ink);
+    }
+    .about-wrap h2 em, .patents-wrap h2 em, .contact-wrap h2 em { font-style: italic; }
+    .about-bio {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 56px;
+      max-width: 720px;
+    }
+    .about-bio p + p { margin-top: 20px; }
+    
+    /* bullet style skills */
+    .skills-bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .skills-bullet-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #222;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 10px;
+    }
+    .skills-bullet-list li strong {
+      font-weight: 500;
+      color: var(--ink);
+      min-width: 150px;
+      letter-spacing: 0.02em;
+    }
+    .skills-bullet-list li span {
+      color: var(--mid);
+      font-weight: 300;
+    }
+    .skills-bullet-list li .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skills-bullet-list li .skill-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      padding: 2px 10px;
+      color: var(--mid);
+      border-radius: 1px;
+      background: var(--white);
+    }
+
+    /* ── PATENTS ─────────────────────────────────────── */
+    .patents-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 48px 100px;
+    }
+    .patents-wrap h2 { margin-bottom: 48px; }
+    .patent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .patent-item {
+      background: var(--white);
+      padding: 28px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      transition: background 0.15s;
+    }
+    .patent-item:hover { background: var(--tag-bg); }
+    .patent-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .patent-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--ink);
+    }
+    .patent-arrow { display: none; }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    .contact-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 72px 48px 100px;
+      text-align: center;
+    }
+    .contact-wrap h2 { margin-bottom: 16px; }
+    .contact-wrap > p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--mid);
+      margin-bottom: 40px;
+    }
+    .contact-email {
+      display: inline-block;
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 4px;
+      transition: color 0.15s;
+      margin-bottom: 48px;
+    }
+    .contact-email:hover { color: var(--accent); }
+    .contact-divider { width: 40px; height: 1px; background: var(--rule); margin: 40px auto; }
+    .contact-note {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+      .hero, .filters, .stats-row, footer { padding-left: 20px; padding-right: 20px; }
+      .grid-wrap { padding: 0 16px 60px; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-row { flex-wrap: wrap; margin: 0 20px 48px; }
+      nav { display: none; }
+      .about-wrap, .patents-wrap, .contact-wrap { padding: 48px 20px 72px; }
+      .skills-bullet-list li { flex-wrap: wrap; }
+      .skills-bullet-list li strong { min-width: 120px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card-img img, .spec-tag { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">Pei Li <em>·</em> Softgoods Eng.</a>
+  <nav>
+    <a href="#" class="nav-link active-nav" data-page="work">Work</a>
+    <a href="#" class="nav-link" data-page="patents">Patents</a>
+    <a href="#" class="nav-link" data-page="about">About</a>
+    <a href="#" class="nav-link cta" data-page="contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ══ WORK PAGE ══════════════════════════════════════ -->
+<div id="page-work" class="page-section active">
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Softgoods · Manufacturing · Design for Assembly</p>
+  <h1>Built to <em>perform</em>,<br>made to last.</h1>
+  <p>Twelve years bringing softgoods from concept to production — spanning tactical gear, medical orthotics, aerospace interiors, and consumer products. Six patents. Dozens of successful production launches.</p>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat">
+    <div class="stat-num">5<span>+</span></div>
+    <div class="stat-label">Patents held</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">12<span>yr</span></div>
+    <div class="stat-label">Industry experience</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Industries</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">30<span>+</span></div>
+    <div class="stat-label">Production launches</div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All work</button>
+  <button class="filter-btn" data-filter="medical">Medical</button>
+  <button class="filter-btn" data-filter="tactical">Tactical</button>
+  <button class="filter-btn" data-filter="backpack">Backpack</button>
+</div>
+
+<!-- PRODUCT GRID -->
+<div class="grid-wrap">
+  <div class="product-grid" id="grid">
+
+    <div class="product-card" data-category="medical" data-index="0">
+      <div class="spec-tag">Medical · Spinal</div>
+      <div class="card-img">
+        <img src="CFAB.png" alt="CFAB" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">CFAB<br>Cervical / spinal brace assembly</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="1">
+      <div class="spec-tag">Medical · Upper Extremity</div>
+      <div class="card-img">
+        <img src="HelixBand.png" alt="HelixBand" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">HelixBand<br>Wrist / elbow support system</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="2">
+      <div class="spec-tag">Medical · Spinal</div>
+      <div class="card-img">
+        <img src="Horizon.png" alt="Horizon" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Horizon<br>Thoracolumbar orthosis</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="3">
+      <div class="spec-tag">Medical · Cervical</div>
+      <div class="card-img">
+        <img src="Miami J.png" alt="Miami J" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Miami J<br>Cervical collar · rigid + soft interface</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="4">
+      <div class="spec-tag">Medical · Lower Extremity</div>
+      <div class="card-img">
+        <img src="OA Knee.png" alt="OA Knee" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">OA Knee<br>Unloader knee orthosis</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="5">
+      <div class="spec-tag">Medical · Lower Extremity</div>
+      <div class="card-img">
+        <img src="Rebound Knee.png" alt="Rebound Knee" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Rebound Knee<br>Hinged knee brace · textile chassis</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="6">
+      <div class="spec-tag">Medical · Foot + Ankle</div>
+      <div class="card-img">
+        <img src="SStep.png" alt="SStep" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">SStep<br>Ankle-foot orthosis · drop-foot</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="7">
+      <div class="spec-tag">Medical · Upper Extremity</div>
+      <div class="card-img">
+        <img src="Swift.png" alt="Swift" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Swift<br>Lightweight wrist / hand orthosis</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="8">
+      <div class="spec-tag">Medical · Spinal</div>
+      <div class="card-img">
+        <img src="TLSO.png" alt="TLSO" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">TLSO<br>Thoracolumbar sacral orthosis</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="medical" data-index="9">
+      <div class="spec-tag">Medical · Lower Extremity</div>
+      <div class="card-img">
+        <img src="Unloader Hip.png" alt="Unloader Hip" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Unloader Hip<br>Hip unloader orthosis · abduction</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="backpack" data-index="10">
+      <div class="spec-tag">Backpack · Bold Top-Load Backpack</div>
+      <div class="card-img">
+        <img src="Bold Top-Load Backpack.png" alt="Bold Top-Load Backpack" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Bold Top-Load Backpack<br>EDC Backpack / backpack</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="backpack" data-index="11">
+      <div class="spec-tag">Backpack · Athena Small Duffle</div>
+      <div class="card-img">
+        <img src="Athena Small Duffle.png" alt="Athena Small Duffle" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Athena Small Duffle<br>Gym Duffle / duffle</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="backpack" data-index="12">
+      <div class="spec-tag">Backpack · Talos Rolltop Backpack</div>
+      <div class="card-img">
+        <img src="Talos Rolltop Backpack.png" alt="Talos Rolltop Backpack" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Talos Rolltop Backpack<br>Travel Backpack / backpack</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="backpack" data-index="13">
+      <div class="spec-tag">Backpack · Axis Duffle</div>
+      <div class="card-img">
+        <img src="Axis Duffle.png" alt="Axis Duffle" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Axis Duffle<br>Duffle / backpack</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="backpack" data-index="14">
+      <div class="spec-tag">Backpack · Sparrow Messenger Bag</div>
+      <div class="card-img">
+        <img src="Sparrow Messenger Bag.png" alt="Sparrow Messenger Bag" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">Sparrow Messenger Bag<br>Laptop Bag/ backpack</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="tactical" data-index="15">
+      <div class="spec-tag">Tactical · SEV</div>
+      <div class="card-img">
+        <img src="SEV.png" alt="SEV" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">SEV<br>Scalable Entry Vest / Plate Carrier</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="tactical" data-index="16">
+      <div class="spec-tag">Tactical · SPR</div>
+      <div class="card-img">
+        <img src="SPR.png" alt="SPR" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">SPR<br>Scalable Plate Rack / Plate Carrier</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="tactical" data-index="17">
+      <div class="spec-tag">Tactical · ILB-AP</div>
+      <div class="card-img">
+        <img src="Assault Pack.png" alt="ILB-AP" />
+      </div>
+      <div class="card-meta">
+        <div class="card-title">ILB-AP<br>Assault Pack / Backpack</div>
+        <div class="card-year">—</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end #page-work -->
+
+<!-- ══ PATENTS PAGE ═══════════════════════════════════ -->
+<div id="page-patents" class="page-section">
+  <div class="patents-wrap">
+    <p class="section-eyebrow">Intellectual Property</p>
+    <h2>Five patents across<br><em>tactical, medical</em> &amp; wearables.</h2>
+    <div class="patent-list">
+      <div class="patent-item">
+        <div>
+          <div class="patent-num">US11079203B2 · Tactical</div>
+          <div class="patent-title">Three-Piece Tactical Cummerbund</div>
+        </div>
+      </div>
+      <div class="patent-item">
+        <div>
+          <div class="patent-num">US20200355469A1 · Tactical</div>
+          <div class="patent-title">Tactical Shoulder Garment</div>
+        </div>
+      </div>
+      <div class="patent-item">
+        <div>
+          <div class="patent-num">US20250099281A1 · Medical</div>
+          <div class="patent-title">Drop Foot Sock Apparatus</div>
+        </div>
+      </div>
+      <div class="patent-item">
+        <div>
+          <div class="patent-num">US12279984B2 · Medical</div>
+          <div class="patent-title">Ankle Foot Orthosis</div>
+        </div>
+      </div>
+      <div class="patent-item">
+        <div>
+          <div class="patent-num">US20240268336A1 · Consumer</div>
+          <div class="patent-title">Modular Dual-Bag System</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT PAGE ════════════════════════════════════ -->
+<div id="page-about" class="page-section">
+  <div class="about-wrap">
+    <p class="section-eyebrow">About</p>
+    <h2>Where apparel design meets<br><em>mechanical engineering.</em></h2>
+    <div class="about-bio">
+      <p>I specialize in the development and manufacturing of high-performance technical softgoods, with an extensive background in translating complex design intent into reliable, manufacturable solutions. My work bridges the critical intersection of apparel design, mechanical engineering, and product development — ensuring that aesthetics and function meet technical specifications.</p>
+      <p>My expertise is rooted in the full product lifecycle: from initial conceptualization and 3D surface development to 2D pattern engineering, material utilization, and production support. I thrive in environments that demand precision, leveraging advanced CAD platforms including Siemens NX, CATIA 3DEXPERIENCE, and Rhino 3D to resolve fit, geometry, and process challenges before tooling begins.</p>
+      <p>Throughout my career I have successfully applied engineering discipline to tactical gear, medical wearables, and aerospace components. Whether managing complex grading challenges or optimizing manufacturing workflows, my focus remains on risk reduction, repeatability, and the modernization of technical development processes.  I continuously strive to become a more well-rounded engineer, embracing the philosophy of first-principles engineering, breaking down complex problems to their fundamental truths and building solutions from the ground up</p>
+    </div>
+    
+    <!-- SKILLS AS BULLET LIST -->
+    <div style="margin-top: 8px;">
+      <ul class="skills-bullet-list">
+        <li><strong>Design &amp; Modeling</strong> <span class="tag-group"><span class="skill-tag">Siemens NX</span><span class="skill-tag">CATIA 3DEXPERIENCE</span><span class="skill-tag">Rhino 3D</span><span class="skill-tag">Gerber AccuMark</span><span class="skill-tag">Teamcenter</span><span class="skill-tag">Adobe Illustrator</span><span class="skill-tag">Photoshop</span><span class="skill-tag">Ink/Stitch</span><span class="skill-tag">Brother PS-300</span></span></li>
+        <li><strong>Product Development</strong> <span class="tag-group"><span class="skill-tag">Full Lifecycle PD</span><span class="skill-tag">DFM</span><span class="skill-tag">DFMEA</span><span class="skill-tag">PFMEA</span><span class="skill-tag">IPQC &amp; OPQC</span><span class="skill-tag">Tolerance Analysis</span><span class="skill-tag">Root Cause Analysis</span><span class="skill-tag">Regulatory Compliance</span><span class="skill-tag">BOM Management</span><span class="skill-tag">Patternmaking</span><span class="skill-tag">Technical Documentation</span></span></li>
+        <li><strong>Prototyping &amp; Fabrication</strong> <span class="tag-group"><span class="skill-tag">Lockstitch</span><span class="skill-tag">Overlock</span><span class="skill-tag">Bar-tack</span><span class="skill-tag">Binding</span><span class="skill-tag">RF Welding</span><span class="skill-tag">Walking Foot</span><span class="skill-tag">Clicker Press</span><span class="skill-tag">Zig-Zag</span><span class="skill-tag">Embroidery</span><span class="skill-tag">Laser Cutting</span></span></li>
+        <li><strong>Machine Shop</strong> <span class="tag-group"><span class="skill-tag">Milling</span><span class="skill-tag">Band Saw</span><span class="skill-tag">Table Saw</span><span class="skill-tag">Drill Press</span><span class="skill-tag">Automated Tooling Design</span></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTACT PAGE ═══════════════════════════════════ -->
+<div id="page-contact" class="page-section">
+  <div class="contact-wrap">
+    <p class="section-eyebrow">Contact</p>
+    <h2>Let's build something<br><em>worth making.</em></h2>
+    <p>Open to full-time roles in softgoods manufacturing engineering, product development, and design for manufacturing — particularly in medical, automotive, aerospace, and consumer product verticals.</p>
+    <a class="contact-email" href="mailto:annie.p.li@gmail.com">annie.p.li@gmail.com</a>
+    <div class="contact-divider"></div>
+    <p class="contact-note">Based in Los Angeles, CA &nbsp;·&nbsp; Available for on-site &amp; hybrid roles</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Pei Li — Manufacturing Engineer</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/pei-li-81961727/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" id="modalInner">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img" id="modalImg">
+      <img id="modalImage" src="" alt="Product image" />
+    </div>
+    <div class="modal-body">
+      <div class="modal-eyebrow" id="modalEyebrow">Category</div>
+      <div class="modal-title" id="modalTitle">Product name</div>
+      <div class="modal-desc" id="modalDesc">Product description</div>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <div class="modal-tags" id="modalTags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Page navigation ─────────────────────────────────
+  const navLinks = document.querySelectorAll('.nav-link');
+  const pages = document.querySelectorAll('.page-section');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.dataset.page;
+      if (!target) return;
+      navLinks.forEach(l => l.classList.remove('active-nav'));
+      document.querySelectorAll('.nav-link[data-page="' + target + '"]').forEach(l => l.classList.add('active-nav'));
+      pages.forEach(p => p.classList.remove('active'));
+      const targetPage = document.getElementById('page-' + target);
+      if (targetPage) { targetPage.classList.add('active'); }
+      window.scrollTo(0, 0);
+    });
+  });
+
+  // ── Filter ──────────────────────────────────────────
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.product-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none';
+      });
+    });
+  });
+
+  // ── Modal data ─────────────────────────────────────
+  const productData = [
+    {
+      title: "CFAB",
+      eyebrow: "Medical Device · Foot and Ankle",
+      desc: "Led the full-cycle development and manufacturing of a custom CFAB (Custom Foot Ankle Boot) orthopedic device, overseeing the process from patient casting to final production. Engineered a heat-molded plastic shell over a precise patient limb cast to produce a lightweight, strong, and smooth custom fit. Developed a patented dorsum strap system featuring a custom-laminated textile with integrated locking attachment for durability, adjustability, and secure fixation. Designed and implemented a specialized silicon plug system to protect the shell structure from heat distortion during custom fitting adjustments. Engineered a quick-release calf strap with an intuitive single-touch touch point to streamline patient donning and doffing. Selected and applied carbon fiber and fiberglass composite laminate to achieve an optimal balance of rigid support, flexibility, and a sleek, low-profile aesthetic. Managed all phases from design and material sourcing through testing, production, and quality assurance to ensure functional performance and long-term durability.",
+      specs: [
+        ["Category", "Foot and Ankle"],
+        ["Construction", "Bonded textile"],
+        ["Materials", "Bonded nylon textile, foam"],
+        ["Company", "Elevate Dynamics"],
+      ],
+      tags: ["Medical","Foot and Ankle","Softgoods"]
+    },
+    {
+      title: "HelixBand",
+      eyebrow: "Medical Device · Upper Extremity",
+      desc: "Led the end-to-end development and manufacturing of the Helix Band, a custom orthopedic support device. Spearheaded the custom development and sourcing of specialized textiles, engineering strategically laminated layers to deliver precise tension control while incorporating edge treatments for maximum patient skin comfort. Designed the construction using high-tensile elastic knitted with non-stretch zones, enabling seamless integration between seams and eliminating bulk at joint connections to prevent abrasion and skin irritation. Managed the complete product lifecycle from initial design and material selection through rigorous testing and full-scale manufacturing, ensuring production functionality, material durability, and comprehensive warranty testing to guarantee long-lasting, reliable performance.",
+      specs: [
+        ["Category", "Upper Extremity"],
+        ["Construction", "Bonded nylon textile"],
+        ["Materials", "Bonded nylon textile, hook and loop, elastic, foam"],
+        ["Company", "Elevate Dynamics"],
+      ],
+      tags: ["Medical","Upper Extremity","Softgoods"]
+    },
+    {
+      title: "Horizon",
+      eyebrow: "Medical Device · Spinal",
+      desc: "Responsible for translating designer sketches into production-ready patterns for the Horizon Lumbar Brace. Developed and optimized sewing processes to ensure efficient, high-quality manufacturing. Created comprehensive work instructions to standardize production procedures and maintain consistency. Trained and supervised technicians on proper assembly techniques, sewing operations, and quality standards to ensure each product met design specifications and performance requirements.",
+      specs: [
+        ["Category", "Lumbar"],
+        ["Construction", "Die cut, lockstitch and binding procedures."],
+        ["Materials", "Spacer mesh, nylon oxford, hook and loop."],
+        ["Company", "Aspen"],
+      ],
+      tags: ["Medical","Spinal","Horizon"]
+    },
+    {
+      title: "Miami J",
+      eyebrow: "Medical Device · Cervical",
+      desc: "Executed prototyping, patternmaking, and technical documentation for the Miami J Cervical Collar. Developed production-ready patterns from design concepts and created comprehensive tech packs to communicate specifications, materials, and construction details to manufacturing teams. Authored detailed work instructions to guide assembly processes and ensure consistency across production runs, while collaborating closely with design and engineering teams to refine prototypes and successfully transition products from development to full-scale manufacturing.",
+      specs: [
+        ["Category", "Cervical"],
+        ["Construction", "Die cut, RF Weld, sewing"],
+        ["Materials", "Nylon hook and loop, spacer mesh"],
+        ["Company", "Ossur"],
+      ],
+      tags: ["Medical","Cervical","Rigid-soft"]
+    },
+    {
+      title: "OA Knee",
+      eyebrow: "Medical Device · Lower Extremity",
+      desc: "Executed prototyping, patternmaking, and technical documentation for the OA Knee. Developed production-ready patterns from design concepts and created comprehensive tech packs to communicate specifications, materials, and construction details to manufacturing teams. Authored detailed work instructions to guide assembly processes and ensure consistency across production runs, while collaborating closely with design and engineering teams to refine prototypes and successfully transition products from development to full-scale manufacturing. Learned Gerber to develop graded patterns for all sizes.",
+      specs: [
+        ["Category", "Knee Orthosis"],
+        ["Construction", "RF welding, sewing"],
+        ["Materials", "Nylon hook and loop, foam"],
+        ["Company", "Ossur"],
+      ],
+      tags: ["Medical","Knee","Unloader"]
+    },
+    {
+      title: "Rebound Knee",
+      eyebrow: "Medical Device · Lower Extremity",
+      desc: "Executed prototyping, patternmaking, and technical documentation for the Rebound Knee. Developed production-ready patterns from design concepts and created comprehensive tech packs to communicate specifications, materials, and construction details to manufacturing teams. Authored detailed work instructions to guide assembly processes and ensure consistency across production runs, while collaborating closely with design and engineering teams to refine prototypes and successfully transition products from development to full-scale manufacturing. Learned Gerber to develop graded patterns for all sizes.",
+      specs: [
+        ["Category", "Hinged Knee Brace"],
+        ["Construction", "RF welding, sewing"],
+        ["Materials", "Nylon hook and loop, foam"],
+        ["Company", "Ossur"],
+      ],
+      tags: ["Medical","Knee","Hinged"]
+    },
+    {
+      title: "SStep",
+      eyebrow: "Medical Device · Foot + Ankle",
+      desc: "Led the full product lifecycle of the Dropfoot Sock from concept through successful market launch. Sourced materials, created engineering drawings, and designed and developed the cabling system that creates lift on the foot while balancing pressure points at cable contact areas. Worked directly with patients to address comfort and reestablish requirements, ensuring the product met real-world needs. Established test protocols for yarn durability testing to warranty standards, bond strength failure analysis, and design for manufacturing. Developed digital patterns and technical documentation to transition the product from R&D to full-scale production, while owning BOM cost management across domestic and overseas suppliers. Collaborated with factories to optimize workflows and ensure on-time delivery, and created IPQC and OPQC documentation to maintain consistent quality standards, culminating in a successful product launch that met all performance, quality, and market objectives.",
+      specs: [
+        ["Category", "Ankle-Foot Orthosis"],
+        ["Construction", "Knitted sock, bonding, sewing, die cut"],
+        ["Materials", "Nylon hook and loop, custom developed yarn, nylon tricot, lamination"],
+        ["Company", "Elevate Dynamics"],
+      ],
+      tags: ["Medical","AFO","Drop-foot"]
+    },
+    {
+      title: "Swift",
+      eyebrow: "Medical Device · Upper Extremity",
+      desc: "Led the development and sourcing of foam liner and insole. Created patterns and tech pack test and manufacturing documentation for the Swift lightweight wrist/hand orthosis.",
+      specs: [
+        ["Category", "Wrist / Hand Orthosis"],
+        ["Construction", "Die cutting, sewing"],
+        ["Materials", "Foam, nylon tricot, hook and loop"],
+        ["Company", "Elevate Dynamics"],
+      ],
+      tags: ["Medical","Wrist","Lightweight"]
+    },
+    {
+      title: "TLSO",
+      eyebrow: "Medical Device · Spinal",
+      desc: "Led manufacturing engineering initiatives for the TLSO, focusing on production optimization and technical support. Trained technicians on proper assembly techniques and quality standards to ensure consistent product quality. Created detailed work instructions and optimized production workflow to streamline assembly processes and maximize line efficiency. Resolved technical difficulties throughout the production cycle to ensure efficient and uninterrupted assembly operations. Developed engineering drawings to communicate design specifications and manufacturing requirements to production teams.",
+      specs: [
+        ["Category", "Thoracolumbar Sacral"],
+        ["Construction", "3D knitting, sewing, die cutting, RF welding"],
+        ["Materials", "Nylon 3D knit, nylon hook and loop"],
+        ["Company", "Aspen"],
+      ],
+      tags: ["Medical","Spinal","TLSO"]
+    },
+    {
+      title: "Unloader Hip",
+      eyebrow: "Medical Device · Lower Extremity",
+      desc: "Executed prototyping, patternmaking, and technical documentation for the Unloader Hip orthosis. Developed production-ready patterns from design concepts and created comprehensive tech packs to communicate specifications, materials, and construction details to manufacturing teams. Authored detailed work instructions to guide assembly processes and ensure consistency across production runs.",
+      specs: [
+        ["Category", "Hip Orthosis"],
+        ["Construction", "Die cutting, sewing, RF welding"],
+        ["Materials", "Nylon hook and loop, foam, spacer mesh"],
+        ["Company", "Ossur"],
+      ],
+      tags: ["Medical","Hip","Abduction"]
+    },
+    {
+      title: "Bold Top-Load Backpack",
+      eyebrow: "Backpack · EDC",
+      desc: "Owned the full lifecycle of the Bold Top-Load Backpack from concept through finished goods, translating designer sketches into production-ready products. Self-taught Rhino 3D to create digital models and generate 2D patterns that captured the contours and fit of the final design. Executed hands-on prototyping through cutting, sewing, and finishing, iterating on seam placement and construction methods to deliver presentation and production-ready samples. Designed and fabricated automated sewing machine tooling to ensure repeatability for complex softgoods assembly. Developed comprehensive technical drawing packages, manufacturing standards, work instructions, and BOMs including sew sequences and seam specifications. Managed material sourcing, vendor relationships, costing, and full-cycle production setup, while evaluating design feasibility and providing hands-on technical feedback on construction, material behavior, and manufacturability, culminating in the successful launch of the backpack collection.",
+      specs: [
+        ["Category", "Backpack"],
+        ["Construction", "Laser cutting, die cutting, sewing"],
+        ["Materials", "Nylon cordura, spacer mesh, EVA foam, webbings, plastic hardware"],
+        ["Company", "MilThread"],
+      ],
+      tags: ["Backpack","EDC"]
+    },
+    {
+      title: "Athena Small Duffle",
+      eyebrow: "Backpack · Gym Duffle",
+      desc: "Developed the Athena Small Duffle from concept through production. Created 2D patterns from designer sketches and generated technical documentation including BOMs, sew sequences, and work instructions. Executed hands-on prototyping through cutting, sewing, and finishing to refine construction methods. Managed material sourcing, vendor relationships, and production setup, ensuring the final product met quality, durability, and cost targets.",
+      specs: [
+        ["Category", "Duffle"],
+        ["Construction", "Laser cutting, sewing"],
+        ["Materials", "Nylon cordura, spacer mesh, webbings, hardware"],
+        ["Company", "MilThread"],
+      ],
+      tags: ["Backpack","Duffle"]
+    },
+    {
+      title: "Talos Rolltop Backpack",
+      eyebrow: "Backpack · Travel",
+      desc: "Led the development of the Talos Rolltop Backpack from designer sketch to finished goods. Generated 2D patterns using Rhino 3D and created comprehensive tech packs including sew sequences and seam specifications. Built hands-on prototypes, iterating on fit and construction methods. Managed BOM costing, material sourcing, and vendor relationships to ensure successful production launch.",
+      specs: [
+        ["Category", "Rolltop Backpack"],
+        ["Construction", "Laser cutting, die cutting, sewing"],
+        ["Materials", "Nylon cordura, EVA foam, webbings, plastic hardware"],
+        ["Company", "MilThread"],
+      ],
+      tags: ["Backpack","Rolltop"]
+    },
+    {
+      title: "Axis Duffle",
+      eyebrow: "Backpack · Duffle",
+      desc: "Developed the Axis Duffle from concept through production, creating 2D patterns and technical documentation including work instructions and BOMs. Executed hands-on prototyping to refine seam placement and construction methods. Managed material sourcing, vendor coordination, and full-cycle production setup for successful market launch.",
+      specs: [
+        ["Category", "Duffle"],
+        ["Construction", "Laser cutting, sewing"],
+        ["Materials", "Nylon cordura, webbings, plastic hardware"],
+        ["Company", "MilThread"],
+      ],
+      tags: ["Backpack","Duffle"]
+    },
+    {
+      title: "Sparrow Messenger Bag",
+      eyebrow: "Backpack · Messenger",
+      desc: "Owned the full lifecycle of the Sparrow Messenger Bag from concept through finished goods. Self-taught Rhino 3D to generate 2D patterns from 3D models. Executed hands-on prototyping and iterated on construction methods. Developed comprehensive tech packs, work instructions, and BOMs. Managed material sourcing and vendor relationships to ensure successful production.",
+      specs: [
+        ["Category", "Messenger Bag"],
+        ["Construction", "Laser cutting, sewing"],
+        ["Materials", "Nylon cordura, foam, webbings, hardware"],
+        ["Company", "MilThread"],
+      ],
+      tags: ["Backpack","Messenger"]
+    },
+    {
+      title: "SEV",
+      eyebrow: "Tactical · Plate Carrier",
+      desc: "Successfully developed and launched Project 7 Armor tactical gear from concept through production, driving innovation across patternmaking, prototyping, costing, material sourcing, and full-cycle manufacturing setup. Reimagined the tactical load-bearing product line around a modular architecture, enabling users to configure plate carriers, cummerbunds, belts, and backpacks to mission-specific needs. Contributed to patented product features including a simplified cummerbund assembly system and a replaceable armor attachment strap design to improve field serviceability. Self-taught legacy Gerber AccuMark software to solve a unique grading challenge for military MOLLE systems, converting graded patterns directly into cut-ready production files. Managed digital pattern development, supplier sourcing, and manufacturing process setup to support prototype and production activities, while leading a team of six sewing technicians in daily work assignments, training, and quality control.",
+      specs: [
+        ["Category", "Plate Carrier"],
+        ["Construction", "Laser cutting, heavy-duty sewing, binding"],
+        ["Materials", "Nylon cordura, webbings, hook and loop, hardware"],
+        ["Company", "Project 7 Armor"],
+      ],
+      tags: ["Tactical","Plate Carrier"]
+    },
+    {
+      title: "SPR",
+      eyebrow: "Tactical · Plate Carrier",
+      desc: "Successfully developed and launched Project 7 Armor tactical gear from concept through production, driving innovation across patternmaking, prototyping, costing, material sourcing, and full-cycle manufacturing setup. Reimagined the tactical load-bearing product line around a modular architecture, enabling users to configure plate carriers, cummerbunds, belts, and backpacks to mission-specific needs. Contributed to patented product features including a simplified cummerbund assembly system and a replaceable armor attachment strap design to improve field serviceability. Self-taught legacy Gerber AccuMark software to solve a unique grading challenge for military MOLLE systems, converting graded patterns directly into cut-ready production files. Managed digital pattern development, supplier sourcing, and manufacturing process setup to support prototype and production activities, while leading a team of six sewing technicians in daily work assignments, training, and quality control.",
+      specs: [
+        ["Category", "Plate Carrier"],
+        ["Construction", "Laser cutting, heavy-duty sewing, binding"],
+        ["Materials", "Nylon cordura, webbings, hook and loop, hardware"],
+        ["Company", "Project 7 Armor"],
+      ],
+      tags: ["Tactical","Plate Carrier"]
+    },
+    {
+      title: "ILB-AP",
+      eyebrow: "Tactical · Assault Pack",
+      desc: "Developed the ILB-AP Assault Pack from concept, to pattern and sewing, in joint development of the connection point to plate carrier platforms enabling seamless integration.",
+      specs: [
+        ["Category", "Assault Pack"],
+        ["Construction", "Laser cutting, heavy-duty sewing"],
+        ["Materials", "Nylon cordura, spacer mesh, webbings, hardware"],
+        ["Company", "Project 7 Armor"],
+      ],
+      tags: ["Tactical","Backpack"]
+    },
+  ];
+
+  // ── Modal open/close ────────────────────────────────
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.dataset.index);
+      const d = productData[idx];
+      if (!d) return;
+      
+      document.getElementById('modalEyebrow').textContent = d.eyebrow;
+      document.getElementById('modalTitle').textContent = d.title;
+      document.getElementById('modalDesc').textContent = d.desc;
+      
+      // Set the modal image from the card's image
+      const cardImg = card.querySelector('.card-img img');
+      document.getElementById('modalImage').src = cardImg ? cardImg.src : '';
+      
+      const specsEl = document.getElementById('modalSpecs');
+      specsEl.innerHTML = d.specs.map(([label, val]) =>
+        `<div class="modal-spec"><div class="modal-spec-label">${label}</div><div class="modal-spec-val">${val}</div></div>`
+      ).join('');
+      const tagsEl = document.getElementById('modalTags');
+      tagsEl.innerHTML = d.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
