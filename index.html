@@ -550,14 +550,8 @@
         flex-wrap: wrap;
         justify-content: space-between;
       }
-      nav a {
-        font-size: 0.68rem;
-        padding: 6px 4px;
-        letter-spacing: 0.04em;
-      }
-      nav a.cta {
-        padding: 6px 10px;
-      }
+      nav a { font-size: 0.68rem; padding: 6px 4px; letter-spacing: 0.04em; }
+      nav a.cta { padding: 6px 10px; }
       .hero { padding: 32px 16px 24px; }
       .hero h1 { font-size: 1.8rem; }
       .filters { padding: 0 16px 24px; gap: 6px; }
@@ -566,6 +560,10 @@
       .stat { flex: 1 1 45%; padding: 20px 16px; }
       .grid-wrap { padding: 0 8px 60px; }
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+
+      /* Shrink card padding so image fills ~1.75x more of the box */
+      .card-img { padding: 8px; }
+
       .card-meta { padding: 10px 12px 12px; }
       .card-title { font-size: 0.75rem; }
       footer { padding: 24px 16px; flex-direction: column; gap: 16px; text-align: center; }
@@ -576,7 +574,6 @@
     }
 
     @media (max-width: 480px) {
-      .product-grid { grid-template-columns: 1fr 1fr; }
       .stat-num { font-size: 2rem; }
     }
 
@@ -932,7 +929,9 @@
 <div class="modal-overlay" id="modal">
   <div class="modal" id="modalInner">
     <button class="modal-close" id="modalClose">✕</button>
-    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-img" id="modalImg">
+      <div style="color:#ccc;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Product image</div>
+    </div>
     <div class="modal-body">
       <div class="modal-eyebrow" id="modalEyebrow">Category</div>
       <div class="modal-title" id="modalTitle">Product name</div>
@@ -1210,7 +1209,6 @@
       document.getElementById('modalEyebrow').textContent = d.eyebrow;
       document.getElementById('modalTitle').textContent = d.title;
       document.getElementById('modalDesc').textContent = d.desc;
-      // pull image src directly from the clicked card
       const cardImg = card.querySelector('.card-img img');
       const modalImgEl = document.getElementById('modalImg');
       modalImgEl.innerHTML = cardImg
